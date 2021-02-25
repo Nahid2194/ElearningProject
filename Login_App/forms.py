@@ -34,3 +34,9 @@ class TeacherEditForm(forms.ModelForm):
     class Meta:
         model = Teacher
         exclude = ('user')
+
+
+class StudentEditForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        exclude = ('user')

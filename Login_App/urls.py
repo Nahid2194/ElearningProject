@@ -5,7 +5,7 @@ app_name = 'Login_App'
 urlpatterns = [
     path('teacher_login/', views.teacher_login, name='teacher_login'),
     path('profile_teacher/', views.profile_teacher, name='profile_teacher'),
-    path('student_profile/', views.student_profile, name='student_profile')
+    path('profile_student/', views.profile_student, name='profile_student'),
     path('student_login/', views.student_login, name='student_login'),
 
 ]

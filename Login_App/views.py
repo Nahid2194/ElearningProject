@@ -22,4 +22,9 @@ def teacher_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(reverse('app_login:profile_teacher'))
+                return HttpResponseRedirect(reverse('Login_App:profile_teacher'))
+    return render(request, 'Login_App/login.html', context={'form': form})
+
+
+def profile_teacher(request):
+    return render(request, 'Login_App/profile_teacher.html', context={})

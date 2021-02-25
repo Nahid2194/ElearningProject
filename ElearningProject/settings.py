@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'Login_App',
     'Course_App',
     'crispy_forms',
-    'django_cleanup.apps.CleanupConfig',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -50,7 +49,7 @@ ROOT_URLCONF = 'ElearningProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATES_DIR, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

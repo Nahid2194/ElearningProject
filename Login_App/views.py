@@ -54,3 +54,16 @@ def profile_student(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('app_login:homepage'))
+
+
+def signup_teacher(request):
+    form = SignupForm()
+    if request.method == 'POST':
+        form = SignupForm(data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            profile_teacher = Teacher(user=user)
+            profile_teacher.save()
+            return HttpResponseRedirect(reverse('App_Login:teacher_login'))
+
+    return render(request, 'Login_App/signup.html', context={'form': form, 'teacher': True})

@@ -23,7 +23,7 @@ def teacher_login(request):
             if user is not None:
                 login(request, user)
                 return HttpResponseRedirect(reverse('Login_App:profile_teacher'))
-    return render(request, 'Login_App/login.html', context={'form': form})
+    return render(request, 'Login_App/login.html', context={'form': form, 'teacher': True})
 
 
 @login_required
@@ -67,3 +67,15 @@ def signup_teacher(request):
             return HttpResponseRedirect(reverse('App_Login:teacher_login'))
 
     return render(request, 'Login_App/signup.html', context={'form': form, 'teacher': True})
+
+
+def signup_student(request):
+    form = SignupForm()
+    if request.method == 'POST':
+        form = SignupForm(data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            profile_student = Student(user=user)
+            profile_student.save()
+            return HttpResponseRedirect(reverse('App_Login:student_login'))
+    return render(request, 'Login_App/signup.html', context={'form': form})

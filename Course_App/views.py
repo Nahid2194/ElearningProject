@@ -20,5 +20,10 @@ def homepage(request):
 @login_required
 def create_course(request):
     form = CourseForm()
-
+    if request.method == 'POST':
+        form = CourseForm(request.POST, request.FILES, user=request.user)
+        if form.is_valid():
+            course = form.save(commit=False)
+            course.save()
+            return HttpResponseRedirect(reverse('Login_App:home'))
     return render(request, 'Course_App/create_course.html', context={'form': form})

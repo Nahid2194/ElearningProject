@@ -52,7 +52,7 @@
     <div class="login">
         <h1 class="text">Create Course</h1>
 
-        <form action="" method="POST" class="form">
+        <form action="" method="POST" enctype="multipart/form-data" class="form">
             {{ form | crispy }}
             {% csrf_token %}
             <button type="submit" class="btn btn-primary button">Publish</button>

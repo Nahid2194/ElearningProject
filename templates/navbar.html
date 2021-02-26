@@ -197,9 +197,13 @@
             {% if user.is_authenticated %}
             {% if user.student_profile %}
             <ul class="nav navbar-nav">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img
-                        src="/media/{{user.student_profile.profile_picture}}" class="avatar"
-                        alt="Avatar">{{user.username}} <b class="caret"></b></a>
+
+                <ul class="nav navbar-nav">
+                    <li> <a href="#"> <img src="/media/{{user.student_profile.profile_picture}}" class="avatar"
+                                alt="Avatar">@{{user.username}}</li> </a>
+
+
+                </ul>
             </ul>
 
             <ul class="nav navbar-nav">

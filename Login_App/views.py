@@ -8,10 +8,6 @@ from .forms import LoginForm, SignupForm, StudentEditForm, TeacherEditForm
 # Create your views here.
 
 
-def homepage(request):
-    return render(request, 'home.html', context={})
-
-
 def teacher_login(request):
     name = 'Teacher Login Form'
     form = LoginForm()

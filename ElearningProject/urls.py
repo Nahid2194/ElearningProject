@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from Login_App import views
+from Course_App import views
 # To show media files
 from django.conf import settings
 from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns

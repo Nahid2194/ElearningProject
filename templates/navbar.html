@@ -195,47 +195,53 @@
             </form>
 
             {% if user.is_authenticated %}
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
+            {% if user.student_profile %}
+            <ul class="nav navbar-nav">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img
+                        src="/media/{{user.student_profile.profile_picture}}" class="avatar"
+                        alt="Avatar">{{user.username}} <b class="caret"></b></a>
+            </ul>
 
-
-                    {% if user.student_profile %}
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img
-                            src="/media/{{user.student_profile.profile_picture}}" class="avatar"
-                            alt="Avatar">{{user.username}} <b class="caret"></b></a>
-
-                    {% elif user.teacher_profile %}
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img
-                            src="/media/{{user.teacher_profile.profile_picture}}" class="avatar"
-                            alt="Avatar">{{user.username}} <b class="caret"></b></a>
-
-
-                    {% else %}
-
-                    <div class="col-md-3 col-lg-3 " align="center"> <img src="/static/images/avatar.jpg" width="120px"
-                            height="120px" class="img-circle img-responsive" alt="default">
-
-                    </div>
-
-                    {% endif %}
-
-
-                    <ul class="dropdown-menu">
-                        {% if teacher %}
-                        <li><a href="{% url 'Login_App:profile_teacher' %}"><i class="fa fa-user-o"></i> Profile</a>
-                        </li>
-                        {% else %}
-                        <li><a href="{% url 'Login_App:profile_student' %}"><i class="fa fa-user-o"></i> Profile</a>
-                        </li>
-
-                        {% endif %}
-
-
-                        <li><a href="{% url 'Login_App:user_logout' %}"><i class="material-icons">&#xE8AC;</i>
-                                Logout</a>
-                        </li>
-                    </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'Login_App:profile_student'  %}"><i class="fa fa-user-o"></i>
+                        Profile</a>
                 </li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'Login_App:user_logout' %}"><i class="material-icons">&#xE8AC;</i>
+                        Logout</a>
+                </li>
+            </ul>
+            {% elif user.teacher_profile %}
+            <ul class="nav navbar-nav">
+                <li> <a href="#"> <img src="/media/{{user.teacher_profile.profile_picture}}" class="avatar"
+                            alt="Avatar">@{{user.username}}</li> </a>
+
+
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'Login_App:profile_teacher'  %}"><i class="fa fa-user-o"></i>
+                        Profile</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'Login_App:user_logout' %}"><i class="material-icons">&#xE8AC;</i>
+                        Logout</a>
+                </li>
+            </ul>
+
+            {% else %}
+
+            <div class="col-md-3 col-lg-3 " align="center"> <img src="/static/images/avatar.jpg" width="120px"
+                    height="120px" class="img-circle img-responsive" alt="default">
+
+            </div>
+
+            {% endif %}
+
+
+
+            </li>
             </ul>
             {% else %}
             <ul class="nav navbar-nav">

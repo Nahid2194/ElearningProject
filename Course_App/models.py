@@ -25,3 +25,18 @@ class Course(models.Model):
     def save(self):
         self.slug = slugify(self.course_title + '-' + str(uuid.uuid4()))
         super(Course, self).save()
+
+
+class Question(models.Model):
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, related_name='course_question')
+    user = models.ForeignKey(
+        Student, on_delete=models.CASCADE, related_name='student_question')
+    question = models.TextField()
+    question_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-question_date']
+
+    def __str__(self):
+        return self.question

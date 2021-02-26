@@ -84,11 +84,24 @@ def signup_student(request):
 @login_required
 def edit_student(request):
     student = Student.objects.get(user=request.user)
-    form = EditStudentForm(instance=student)
+    form = StudentEditForm(instance=student)
     if request.method == 'POST':
-        form = EditStudentForm(request.POST, instance=student)
+        form = StudentEditForm(request.POST, instance=student)
         if form.is_valid():
             form.save()
-            form = EditStudentForm(instance=student)
+            form = StudentEditForm(instance=student)
             return HttpResponseRedirect(reverse('Login_App:profile_student'))
+    return render(request, 'Login_App/signup.html', context={'form': form, 'name': 'Update'})
+
+
+@login_required
+def edit_teacher(request):
+    teacher = Teacher.objects.get(user=request.user)
+    form = TeacherEditForm(instance=teacher)
+    if request.method == 'POST':
+        form = TeacherEditForm(request.POST, instance=teacher)
+        if form.is_valid():
+            form.save()
+            form = StudentEditForm(instance=student)
+            return HttpResponseRedirect(reverse('Login_App:profile_teacher'))
     return render(request, 'Login_App/signup.html', context={'form': form, 'name': 'Update'})

@@ -21,9 +21,13 @@ def homepage(request):
 def create_course(request):
     form = CourseForm()
     if request.method == 'POST':
-        form = CourseForm(request.POST, request.FILES, user=request.user)
+        form = CourseForm(request.POST, request.FILES)
         if form.is_valid():
-            course = form.save(commit=False)
-            course.save()
-            return HttpResponseRedirect(reverse('Login_App:home'))
+            course_obj = form.save(commit=False)
+            course_obj.teacher = request.user.teacher_profile
+            title = course_obj.course_title
+            course_obj.slug = slugify(
+                title.replace(" ", "-") + str(uuid.uuid4()))
+            course_obj.save()
+            return HttpResponseRedirect(reverse('home'))
     return render(request, 'Course_App/create_course.html', context={'form': form})

@@ -55,7 +55,7 @@ def profile_student(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('app_login:homepage'))
+    return HttpResponseRedirect(reverse('Login_App:homepage'))
 
 
 def signup_teacher(request):
@@ -66,9 +66,9 @@ def signup_teacher(request):
             user = form.save()
             profile_teacher = Teacher(user=user)
             profile_teacher.save()
-            return HttpResponseRedirect(reverse('App_Login:teacher_login'))
+            return HttpResponseRedirect(reverse('Login_App:teacher_login'))
 
-    return render(request, 'Login_App/signup.html', context={'form': form, 'teacher': True})
+    return render(request, 'Login_App/signup.html', context={'form': form, 'teacher': True, 'name': 'Teacher'})
 
 
 def signup_student(request):
@@ -79,8 +79,8 @@ def signup_student(request):
             user = form.save()
             profile_student = Student(user=user)
             profile_student.save()
-            return HttpResponseRedirect(reverse('App_Login:student_login'))
-    return render(request, 'Login_App/signup.html', context={'form': form})
+            return HttpResponseRedirect(reverse('Login_App:student_login'))
+    return render(request, 'Login_App/signup.html', context={'form': form, 'name': 'Student'})
 
 
 @login_required

@@ -50,17 +50,22 @@
 {% block body_block %}
 <center>
     <div class="login">
-        <h1 class="text">Login:</h1>
+        <h1 class="text">{{name}}</h1>
 
         <form action="" method="POST" class="form">
             {{ form | crispy }}
             {% csrf_token %}
             <button type="submit" class="btn btn-primary button">Login</button>
         </form>
-
+        {% if teacher %}
         <h5 class="signup">
-            Doesn't have an account? <a href="#">Create New Account</a>
+            Doesn't have an account? <a href="{% url 'Login_App:signup_teacher' %}">Create New Account</a>
         </h5>
+        {% else %}
+        <h5 class="signup">
+            Doesn't have an account? <a href="{% url 'Login_App:signup_student' %}">Create New Account</a>
+        </h5>
+        {% endif %}
     </div>
 </center>
 

@@ -9,10 +9,11 @@ from .forms import LoginForm, SignupForm, StudentEditForm, TeacherEditForm
 
 
 def homepage(request):
-    return render(request, 'Login_App/login.html', context={})
+    return render(request, 'home.html', context={})
 
 
 def teacher_login(request):
+    name = 'Teacher Login Form'
     form = LoginForm()
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
@@ -23,7 +24,7 @@ def teacher_login(request):
             if user is not None:
                 login(request, user)
                 return HttpResponseRedirect(reverse('Login_App:profile_teacher'))
-    return render(request, 'Login_App/login.html', context={'form': form, 'teacher': True})
+    return render(request, 'Login_App/login.html', context={'form': form, 'teacher': True, 'name': name})
 
 
 @login_required
@@ -32,6 +33,7 @@ def profile_teacher(request):
 
 
 def student_login(request):
+    name = 'Student Login Form'
     form = LoginForm()
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
@@ -42,7 +44,7 @@ def student_login(request):
             if user is not None:
                 login(request, user)
                 return HttpResponseRedirect(reverse('Login_App:profile_student'))
-    return render(request, 'Login_App/login.html', context={'form': form})
+    return render(request, 'Login_App/login.html', context={'form': form, 'name': name})
 
 
 @login_required

@@ -1,7 +1,11 @@
 {% extends "base.html"%}
 {% block title_block %}All Course {% endblock %}
 {% block css_block %}
-
+<style>
+    .main {
+        margin-bottom: 10px;
+    }
+</style>
 {% endblock %}
 {% block body_block %}
 {% include "navbar.html" %}
@@ -9,13 +13,14 @@
 <div class="container my-5">
     <div class="row">
         {% for course in courses %}
-        <div class="col-md-6 col-sm-12 col-lg-4">
+        <div class="col-md-6 col-sm-12 col-lg-4 main">
             <figure class="card card-product">
                 <div class="img-wrap card-body">
                     <img src="/media/{{course.course_picture}}" class=" card-img-top" alt="">
                 </div>
                 <figcaption class="info-wrap">
-                    <a href="#" class="text pl-3">{{course.course_title}}</a>
+                    <a href="{% url 'Course_App:course_details' slug=course.slug %}"
+                        class="text pl-3">{{course.course_title}}</a>
                     <hr>
                     <div class="row justify-content-center">
                         <div class="price-wrap h6 col-6">
@@ -26,11 +31,11 @@
                             {% if course.teacher.profile_picture %}
                             <span> <img src="/media/{{course.teacher.profile_picture}}" alt="" width="23px"
                                     height="23px" class="rounded-circle">
-                                <small>@{{user.username}}</small></span>
+                                <small>@{{course.teacher.user.username}}</small></span>
 
                             {% else %}
                             <span><img src="/static/images/avatar.jpg" width="23px" height="23px" class="rounded-circle"
-                                    alt="default"><small>@{{user.username}} </small> </span>
+                                    alt="default"><small>@{{course.teacher.user.username}}</small> </span>
                             {% endif %}
                         </div>
                     </div>

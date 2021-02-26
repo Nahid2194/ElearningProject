@@ -1,0 +1,133 @@
+{% load static %}
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+{% block css_block %}
+<style>
+    .user-row {
+        margin-bottom: 14px;
+    }
+
+    .user-row:last-child {
+        margin-bottom: 0;
+    }
+
+    .dropdown-user {
+        margin: 13px 0;
+        padding: 5px;
+        height: 100%;
+    }
+
+    .dropdown-user:hover {
+        cursor: pointer;
+    }
+
+    .table-user-information>tbody>tr {
+        border-top: 1px solid rgb(221, 221, 221);
+    }
+
+    .table-user-information>tbody>tr:first-child {
+        border-top: 0;
+    }
+
+
+    .table-user-information>tbody>tr>td {
+        border-top: 0;
+    }
+
+    .toppad {
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+            {% if teacher %}
+            <A href="{% url 'Login_App:edit_teacher' %}">Edit Profile</A>
+            {% else %}
+            <A href="{% url 'Login_App:edit_student' %}">Edit Profile</A>
+            {% endif %}
+
+
+            <A href="{% url 'Login_App:user_logout' %}">Logout</A>
+            <br>
+            <p class=" text-info">Joined Date:{{user.date_joined}} </p>
+        </div>
+        <div
+            class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{user.username}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        {% if user.student_profile %}
+                        <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic"
+                                src="/media/{{user.student_profile.profile_picture}}" class="img-circle img-responsive">
+                        </div>
+
+                        {% elif user.teacher_profile %}
+                        <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic"
+                                src="/media/{{user.teacher_profile.profile_picture}}" class="img-circle img-responsive">
+                        </div>
+
+
+                        {% else %}
+
+                        <div class="col-md-3 col-lg-3 " align="center"> <img src="/static/images/avatar.jpg"
+                                width="120px" height="120px" class="img-circle img-responsive" alt="default">
+
+                        </div>
+
+                        {% endif %}
+
+                        <div class="col-md-9 col-lg-9">
+                            <table class="table table-user-information">
+                                {% if user.is_authenticated %}
+                                <tbody>
+                                    <tr>
+                                        <td>User Name</td>
+                                        <td>{{user.username}}</td>
+                                    </tr>
+                                    {% if teacher %}
+                                    <tr>
+                                        <td>Course Name</td>
+                                        <td>{{user.teacher_profile.course_title}}</td>
+                                    </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td>Joined Date </td>
+                                        <td>{{user.date_joined}}</td>
+                                    </tr>
+
+                                    <tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td><a href="{{user.profile.email}}">{{user.email}}</a></td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td>Website</td>
+                                        <td><a target="_blank" href="{{user.profile.website}}">Click Website</a>
+                                        </td>
+                                    </tr> -->
+
+
+                                </tbody>
+                                {% endif %}
+                            </table>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

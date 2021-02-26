@@ -33,10 +33,10 @@ class SignupForm(UserCreationForm):
 class TeacherEditForm(forms.ModelForm):
     class Meta:
         model = Teacher
-        exclude = ('user',)
+        exclude = ['user']
 
 
 class StudentEditForm(forms.ModelForm):
     class Meta:
         model = Student
-        exclude = ('user',)
+        exclude = ['user']

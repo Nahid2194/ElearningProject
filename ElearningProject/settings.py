@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     'Login_App',
     'Course_App',
     'crispy_forms',
+    'django_cleanup',
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -117,3 +119,4 @@ STATICFILES_DIRS = [STATIC_DIR]
 # Media
 
 MEDIA_URL = '/media/'
+LOGIN_URL = '/account/home/'

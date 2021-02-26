@@ -29,7 +29,7 @@ def teacher_login(request):
 
 @login_required
 def profile_teacher(request):
-    return render(request, 'Login_App/profile.html', context={})
+    return render(request, 'Login_App/profile.html', context={'teacher': True})
 
 
 def student_login(request):
@@ -55,7 +55,7 @@ def profile_student(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('Login_App:homepage'))
+    return HttpResponseRedirect(reverse('home'))
 
 
 def signup_teacher(request):
@@ -88,12 +88,12 @@ def edit_student(request):
     student = Student.objects.get(user=request.user)
     form = StudentEditForm(instance=student)
     if request.method == 'POST':
-        form = StudentEditForm(request.POST, instance=student)
+        form = StudentEditForm(request.POST, request.FILES, instance=student)
         if form.is_valid():
-            form.save()
-            form = StudentEditForm(instance=student)
+            student = form.save(commit=False)
+            student.save()
             return HttpResponseRedirect(reverse('Login_App:profile_student'))
-    return render(request, 'Login_App/signup.html', context={'form': form, 'name': 'Update'})
+    return render(request, 'Login_App/edit_profile.html', context={'form': form, 'name': 'Update'})
 
 
 @login_required
@@ -101,9 +101,9 @@ def edit_teacher(request):
     teacher = Teacher.objects.get(user=request.user)
     form = TeacherEditForm(instance=teacher)
     if request.method == 'POST':
-        form = TeacherEditForm(request.POST, instance=teacher)
+        form = TeacherEditForm(request.POST, request.FILES, instance=teacher)
         if form.is_valid():
-            form.save()
-            form = StudentEditForm(instance=student)
+            teacher = form.save(commit=False)
+            teacher.save()
             return HttpResponseRedirect(reverse('Login_App:profile_teacher'))
-    return render(request, 'Login_App/signup.html', context={'form': form, 'name': 'Update'})
+    return render(request, 'Login_App/edit_profile.html', context={'form': form, 'name': 'Update', 'teacher': True})

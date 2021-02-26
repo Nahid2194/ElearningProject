@@ -40,3 +40,16 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question
+
+
+class ReplyQuestion(models.Model):
+    question = models.ForeignKey(
+        Question, on_delete=models.CASCADE, related_name='question_reply')
+
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='user_reply')
+    reply = models.TextField()
+    reply_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.reply

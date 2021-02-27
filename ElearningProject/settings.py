@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'Login_App',
     'Course_App',
     'crispy_forms',
-    'django_cleanup',
+    'django_cleanup.apps.CleanupConfig',
 
 ]
 

@@ -51,3 +51,7 @@ def courseDetails(request, slug):
 @login_required
 def question(request, pk):
     return render(request, 'Course_App/question.html', context={})
+
+
+class Mycourse(LoginRequiredMixin,TemplateView):
+    template_name = 'Course_App/mycourse.html'

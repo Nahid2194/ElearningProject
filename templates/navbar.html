@@ -175,7 +175,7 @@
         <!-- Collection of nav links, forms, and other content for toggling -->
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <div class="navbar-header navbar-left">
-                <a class="navbar-brand  " href="#"><i class="fa fa-cube"></i>E<b>Learning</b></a>
+                <a class="navbar-brand  " href="/"><i class="fa fa-cube"></i>E<b>Learning</b></a>
             </div>
 
             <ul class="nav navbar-nav">
@@ -229,8 +229,11 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav">
-                <li><a href="{% url 'Login_App:user_logout' %}"><i class="material-icons">&#xE8AC;</i>
-                        Logout</a>
+                <li><a href="{% url 'Course_App:mycourse' %}"><i class="fas fa-book-open"></i> My Course</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'Login_App:user_logout' %}"><i class="material-icons">&#xE8AC;</i>Logout</a>
                 </li>
             </ul>
 

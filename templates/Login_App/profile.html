@@ -41,6 +41,7 @@
     }
 </style>
 {% endblock %}
+{% include "navbar.html" %}
 <div class="container">
     <div class="row">
         <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
@@ -65,12 +66,12 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        {% if user.student_profile %}
+                        {% if user.student_profile.profile_picture %}
                         <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic"
                                 src="/media/{{user.student_profile.profile_picture}}" class="img-circle img-responsive">
                         </div>
 
-                        {% elif user.teacher_profile %}
+                        {% elif user.teacher_profile.profile_picture %}
                         <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic"
                                 src="/media/{{user.teacher_profile.profile_picture}}" class="img-circle img-responsive">
                         </div>

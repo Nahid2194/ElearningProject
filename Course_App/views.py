@@ -50,7 +50,17 @@ def courseDetails(request, slug):
 
 @login_required
 def question(request, pk):
-    return render(request, 'Course_App/question.html', context={})
+    form = ReplyForm()
+    question = Question.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = ReplyForm(request.POST)
+        if form.is_valid():
+            reply = form.save(commit=False)
+            reply.user = request.user
+            reply.question = question
+            reply.save()
+            return HttpResponseRedirect(reverse('Course_App:question',kwargs={'pk':pk}))
+    return render(request, 'Course_App/question.html', context={'form': form,'question':question})
 
 
 class Mycourse(LoginRequiredMixin,TemplateView):
